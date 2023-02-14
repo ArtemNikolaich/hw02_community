@@ -6,9 +6,9 @@ User = get_user_model()
 
 
 class Group(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True)
-    description = models.TextField()
+    title = models.CharField(max_length=200, verbose_name='Название')
+    slug = models.SlugField(unique=True, verbose_name='Идентификатор')
+    description = models.TextField(verbose_name='Описание')
 
     def __str__(self) -> str:
         return self.title
@@ -34,8 +34,8 @@ class Post(models.Model):
         verbose_name='Группа'
     )
 
+    class Meta:
+        ordering = ('-pub_date',)
+
     def __str__(self) -> str:
         return self.text[:15]
-
-    class Meta:
-        ordering = ['-pub_date']
